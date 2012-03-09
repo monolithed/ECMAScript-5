@@ -1,3 +1,11 @@
+/**
+ * Implementation of ECMAScript 5: Array
+ * Licensed under the MIT
+ * @author: Alexander Guinness
+ * @version: 1.0
+ * @date: Fri Jun 27 17:26:00 2011
+ **/
+
 (function($) {
 	'use strict';
 
