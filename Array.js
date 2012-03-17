@@ -14,7 +14,6 @@
 	 * @return {Boolean} Returns true if a variable is an array, false if it is not
 	 * @edition ECMA-262 5th Edition, 15.4.3.2
 	*/
-
 	if(!Array.isArray) {
 		Array.isArray = function(object) {
 			return Object.prototype.toString.call(object) === '[object Array]';
@@ -26,7 +25,6 @@
 	 * @return {Number} The first index at which a given element can be found in the array, or -1 if it is not present
 	 * @edition ECMA-262 5th Edition, 15.4.4.14
 	*/
-
 	if(!$.indexOf) {
 		$.indexOf = function(object, from) {
 			var length = this.length,
@@ -119,7 +117,6 @@
 	 * @return {Array} Creates a new array with all elements that pass the test implemented by the provided function
 	 * @edition ECMA-262 5th Edition, 15.4.4.20
 	*/
-
 	if(!$.filter) {
 		$.filter = function(fn, object) {
 			var length = this.length, array = [], i = -1;
@@ -137,7 +134,6 @@
 	 * @return {mixed} Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.
 	 * @edition ECMA-262 5th Edition, 15.4.4.21
 	*/
-
 	if(!$.reduce) {
 		$.reduce = function(fn, init) {
 			var length = this.length, i = -1;
@@ -163,7 +159,6 @@
 	 * @return {mixed} Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.
 	 * @edition ECMA-262 5th Edition, 15.4.4.22
 	*/
-
 	if(!$.reduceRight) {
 		$.reduceRight = function(fn, init) {
 			var i = this.length;
