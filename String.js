@@ -1,9 +1,12 @@
 /**
  * String.prototype.trim ( )
  * Removes whitespace from both ends of the string
- * @edition ECMA-262 5th Edition, 15.5.4.20
+ * @edition: ECMA-262 5th Edition, 15.5.4.20
  * @return {String} the string stripped of whitespace from both ends
- * @date 11:34 PM 4/12/12
+ * @author: Alexander Guinness
+ * @version: 1.0
+ * @license: MIT
+ * @date: 11:34 PM 4/12/12
 */
 
 (function($) {
