@@ -39,6 +39,8 @@ Implementation of ECMAScript 5
 * **String.prototype.trim**<br />
 *Removes whitespace from both ends of the string**<br />
 
+##
+
 * License
    ECMAScript 5 implementation is licensed under the MIT (MIT_LICENSE.txt) license
 
