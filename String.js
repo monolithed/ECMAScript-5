@@ -3,7 +3,7 @@
  * Removes whitespace from both ends of the string
  * @edition ECMA-262 5th Edition, 15.5.4.20
  * @return {String} the string stripped of whitespace from both ends
- * @data 11:34 PM 4/12/12
+ * @date 11:34 PM 4/12/12
 */
 
 (function($) {
