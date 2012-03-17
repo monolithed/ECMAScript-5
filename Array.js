@@ -48,7 +48,6 @@
 	 * @edition ECMA-262 5th Edition, 15.4.4.16
 	 * @return {Boolean} Tests whether all elements in the array pass the test implemented by the provided function
 	*/
-
 	if(!$.every) {
 		$.every = function(fn, object) {
 			var length = this.length, i = -1;
