@@ -34,6 +34,11 @@ Implementation of ECMAScript 5
 * **Array.prototype.reduceRight**<br />
 *Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value**<br />
 
+
+## String
+* **String.prototype.trim**<br />
+*Removes whitespace from both ends of the string**<br />
+
 * License
    ECMAScript 5 implementation is licensed under the MIT (MIT_LICENSE.txt) license
 
