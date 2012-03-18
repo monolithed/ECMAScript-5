@@ -45,7 +45,8 @@
 	}
 
 	/**
-	 * Object.create(Object object [, properties Properties ])
+	 * Object.create(Object object [, properties Properties ]).
+	 * Creates a new object with the specified prototype object and properties.
 	 * @param {Object} object - The object whose prototype is to be returned
 	 * @include: Object.defineProperties
 	 * @param {Object} properties - If specified and not undefined, an object whose enumerable own properties
@@ -53,7 +54,7 @@
 	 * prototype chain) specify property descriptors to be added to the newly-created object,
 	 * with the corresponding property names
 	 * @link {Object.keys}
-	 * @return: The object whose enumerable and non-enumerable own properties are to be returned
+	 * @return: Object
 	 * @edition ECMA-262 5th Edition, 15.2.3.5
 	 *
 	 * NOTE: This is not a complete implementation!
