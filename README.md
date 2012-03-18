@@ -64,7 +64,7 @@ Implementation of ECMAScript 5
 * **Date.prototype.toISOString**<br />
 *Converts a date to a string following the ISO 8601 Extended Format**<br />
 
-* *Date.now**<br />
+* **Date.now**<br />
 *Returns the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC**<br />
 
 * **Date.prototype.toJSON**<br />
