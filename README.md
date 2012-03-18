@@ -71,6 +71,11 @@ Implementation of ECMAScript 5
 *Provides a String representation of a Date object for use by JSON.stringify**<br />
 
 
+## Function
+* **Function.prototype.bind**<br />
+*Creates a new function that, when called, itself calls this function in the context of the provided \<this\> value, with a given sequence of arguments preceding any provided when the new function was called**<br />
+
+
 ##.
 
 * License
