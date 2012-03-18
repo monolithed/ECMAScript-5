@@ -1,8 +1,8 @@
 /**
  * Implementation of ECMAScript 5: Date
- * Licensed under the MIT
  * @author: Alexander Guinness
  * @version: 1.0
+ * license: MIT
  * @date: Sun Apr 15 01:55:00 2012
  **/
 
