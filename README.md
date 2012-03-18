@@ -59,6 +59,18 @@ Implementation of ECMAScript 5
 * **Object.keys**<br />
 *Returns an array of all own enumerable properties found upon a given object, in the same order as that provided by a for-in loop**<br />
 
+
+## Date
+* **Date.prototype.toISOString**<br />
+*Converts a date to a string following the ISO 8601 Extended Format**<br />
+
+* *Date.now**<br />
+*Returns the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC**<br />
+
+* **Date.prototype.toJSON**<br />
+*Provides a String representation of a Date object for use by JSON.stringify**<br />
+
+
 ##.
 
 * License

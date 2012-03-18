@@ -81,7 +81,6 @@
 	 * @return {Array} Executes a provided function once per array element
 	 * @edition ECMA-262 5th Edition, 15.4.4.18
 	*/
-
 	if(!$.forEach) {
 		$.forEach = function(fn, object) {
 			var length = this.length, i = -1;
