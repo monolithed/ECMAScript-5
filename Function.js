@@ -45,8 +45,8 @@
 	 *console.log(fn.bind2(object)()); // 1
 	 *
 	*/
-	if (!$.bind2) {
-		$.bind2 = function bind(context) {
+	if (!$.bind) {
+		$.bind = function (context) {
 			if (typeof this !== 'function')
 			  throw new TypeError('Function.prototype.bind: '.concat(this, 'is not callable!'));
 
