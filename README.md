@@ -39,7 +39,27 @@ Implementation of ECMAScript 5
 * **String.prototype.trim**<br />
 *Removes whitespace from both ends of the string**<br />
 
-##
+
+## Object
+* **Object.getPrototypeOf**<br />
+*Returns the prototype of the specified object**<br />
+
+* **Object.getOwnPropertyNames**<br />
+*The object whose enumerable and non-enumerable own properties are to be returned**<br />
+
+* **Object.create**<br />
+*Creates a new object with the specified prototype object and properties**<br />
+
+* **Object.defineProperty**<br />
+*The defineProperty function is used to add an own property and/or update the attributes of an existing own property of an object**<br />
+
+* **Object.defineProperties**<br />
+*The defineProperties function is used to add own properties and/or update the attributes of existing own properties of an object**<br />
+
+* **Object.keys**<br />
+*Returns an array of all own enumerable properties found upon a given object, in the same order as that provided by a for-in loop**<br />
+
+##.
 
 * License
    ECMAScript 5 implementation is licensed under the MIT (MIT_LICENSE.txt) license
