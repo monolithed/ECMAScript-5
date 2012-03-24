@@ -343,11 +343,11 @@
 
 	if(!Object.create) {
 		Object.create = function(object, properties) {
-			if (type.call(object) !== '[object Object]')
+			if (typeof object !== 'object')
 				throw new TypeError('Object.create'.concat(': ', object.toString(), ' is not an Object or Null'));
 
 			var __new__ = function() {};
-			_.prototype = object;
+			__new__.prototype = object;
 			var init = new __new__();
 			__new__.constructor.prototype = object;
 
