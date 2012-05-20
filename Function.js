@@ -42,7 +42,7 @@
 	*   }
 	 *};
 	 *
-	 *console.log(fn.bind2(object)()); // 1
+	 *console.log(fn.bind(object)()); // 1
 	 *
 	*/
 	if (!$.bind) {
