@@ -2,7 +2,7 @@
  * Implementation of ECMAScript 5:
  * Array, String, Object, Date, Function
  * @author: Alexander Guinness
- * @version: 1.0
+ * @version: 1.1
  * license: MIT
  * @date: Fri Jun 27 17:26:00 2011
  **/
@@ -469,7 +469,7 @@
 /**
  * Implementation of ECMAScript 5: Function
 */
-(function($) {
+(function(F) {
 	/**
 	 * Function.prototype.bind (thisArg [, arg1 [, arg2, …]]);
 	 * Creates a new function that, when called, itself calls this function in the context
@@ -487,28 +487,28 @@
 	 * Example:
 	 * var fn = function() {
 	 *    return Array.prototype.slice.call(arguments);
-	 *};
+	 * };
 	 *
 	 * var binded = fn.bind(null,1,2,3)(4,5);
-	 * console.log(binded); // [1,2,3,4,5]
-	 * console.log(binded.length); // 5
+	 * binded; // [1,2,3,4,5]
+	 * binded.length; // 5
 	 *
 	 * var fn = function() {
 	 *    return this.a;
 	 * };
 	 *
-	 *var object = {
-	*   a: 1,
-	*   b: function() {
-	*      return this.a;
-	*   }
-	 *};
+	 * var object = {
+	 *   a: 1,
+	 *   b: function() {
+	 *      return this.a;
+	 *   }
+	 * };
 	 *
-	 *console.log(fn.bind(object)()); // 1
+	 * fn.bind(object)(); // 1
 	 *
 	*/
-	if (!$.bind) {
-		$.bind = function(context) {
+	if (!F.bind) {
+		F.bind = function (context) {
 			if (typeof this !== 'function')
 			  throw new TypeError('Function.prototype.bind: '.concat(this, 'is not callable!'));
 
@@ -532,7 +532,37 @@
 			return bound;
 		};
 	}
+
+	/*
+	 * Function.prototype.apply (thisArg, argArray);
+	 * 15.3.4.3: In Edition 3, a TypeError is thrown if the second argument passed to
+	 * Function.prototype.apply is neither an array object nor an arguments object. In Edition 5, the second
+	 * argument may be any kind of generic array-like object that has a valid length property.
+	 *
+	 * @author: Alexander Guinness
+	 * @version: 1.0
+	 * @license: MIT
+	 *
+	 * Example:
+	 * Math.max.apply(null, {length: 2, 0: 0, 1: 1}); // 1
+	*/
+	(function(apply) {
+		try {
+			Function.apply(null, {length: 0});
+		}
+		catch (error) {
+			Function.prototype.apply = function(context, object)
+			{
+				if (Object.prototype.toString.call(object) !== '[object Array]')
+					object = Array.prototype.slice.call(object);
+
+				return apply.call(this, context, object);
+			}
+		}
+	}(F.apply));
+
 }(Function.prototype));
+
 
 
 /**
