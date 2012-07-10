@@ -62,6 +62,7 @@
 	 *
 	 * Example:
 	 * Object.create({}, { object: { value: 1 } });
+	 * Object.create(null).constructor; //undefined
 	*/
 
 	if(!Object.create) {
@@ -72,7 +73,11 @@
 			var __new__ = function() {};
 			__new__.prototype = object;
 			var init = new __new__();
-			__new__.constructor.prototype = object;
+
+			if ('__proto__' in init)
+				init.__proto__ = object;
+			else
+				init.constructor.prototype = object;
 
 			if (Object.defineProperties && properties)
 				Object.defineProperties(init, properties);
