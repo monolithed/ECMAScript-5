@@ -76,8 +76,6 @@
 
 			if ('__proto__' in init)
 				init.__proto__ = object;
-			else
-				init.constructor.prototype = object;
 
 			if (Object.defineProperties && properties)
 				Object.defineProperties(init, properties);
