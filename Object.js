@@ -1,12 +1,12 @@
 /**
  * Implementation of ECMAScript 5: Object
  * @author: Alexander Guinness
- * @version: 1.0
+ * @version: 1.1
  * license: MIT
  * @date: Sun Apr 15 00:08:00 2012
  **/
 
-(function(type) {
+(function(O) {
 	/**
 	 * Object.getPrototypeOf ( Object )
 	 * @param {Object} The object whose prototype is to be returned
@@ -18,7 +18,7 @@
 	*/
 	if(!Object.getPrototypeOf) {
 		Object.getPrototypeOf = function (object) {
-			if (type.call(object) !== '[object Object]')
+			if (O.toString.call(object) !== '[object Object]')
 				throw new TypeError('Object.getPrototypeOf'.concat(': ', object.toString(), ' is not an Object'));
 
 			return object.__proto__ || object.constructor.prototype;
@@ -37,10 +37,19 @@
 	 * //["length", "name", "arguments", "caller"]
 	*/
 	if(!Object.getOwnPropertyNames) {
-		Object.getOwnPropertyNames = function (object) {
-			if (Object.prototype.toString.call(object) !== '[object Object]')
+		Object.getOwnPropertyNames = function (object)
+		{
+			if (O.toString.call(object) !== '[object Object]')
 				throw new TypeError('Object.getOwnPropertyNames'.concat(': ', object.toString(), ' is not an Object'));
-			return Object.keys(object);
+
+			var result = [];
+
+			for (var key in object) {
+				if (O.hasOwnProperty.call(object, key) && O.propertyIsEnumerable.call(object, key))
+					result.push(key);
+			}
+
+			return result;
 		};
 	}
 
@@ -66,7 +75,8 @@
 	*/
 
 	if(!Object.create) {
-		Object.create = function(object, properties) {
+		Object.create = function(object, properties)
+		{
 			if (typeof object !== 'object')
 				throw new TypeError('Object.create'.concat(': ', object.toString(), ' is not an Object or Null'));
 
@@ -104,12 +114,13 @@
 	 	get: ElementTravrsal.childElementCount
 	 });
 	*/
-	if(!Object.defineProperty && Object.prototype.__defineGetter__) {
-		Object.defineProperty = function(object, property, attributes) {
-			if (type.call(object) !== '[object Object]' && type.call(attributes) !== '[object Object]' && typeof property !== 'string')
+	if(!Object.defineProperty && O.__defineGetter__ && O.__lookupGetter__) {
+		Object.defineProperty = function(object, property, attributes)
+		{
+			if (O.toString.call(object) !== '[object Object]' && O.toString.call(attributes) !== '[object Object]' && typeof property !== 'string')
 				throw new TypeError('Object.defineProperty ( Object object, String property, Object attributes)');
 
-			if(Object.prototype.hasOwnProperty.call(attributes, 'value')) {
+			if(O.hasOwnProperty.call(attributes, 'value')) {
 				if(!object.__lookupGetter__(property) && !object.__lookupSetter__(property))
 					object[property] = attributes.value;
 			}
@@ -153,15 +164,16 @@
 	 * console.log(object.b); //2
 	*/
 	if(!Object.defineProperties) {
-		Object.defineProperties = function(object, properties) {
-			if (type.call(object) !== '[object Object]' && type.call(properties) !== '[object Object]')
+		Object.defineProperties = function(object, properties)
+		{
+			if (O.toString.call(object) !== '[object Object]' && O.toString.call(properties) !== '[object Object]')
 				throw new TypeError('Object.defineProperties( Object object, properties Object )');
 
 			if (!Object.defineProperty)
 				return object;
 
 			for(var i in properties) {
-				if(Object.prototype.hasOwnProperty.call(properties, i))
+				if(O.hasOwnProperty.call(properties, i))
 					Object.defineProperty(object, i, properties[i]);
 			}
 			return object;
@@ -180,17 +192,18 @@
 	 * Object.keys({a: 1});
 	*/
 	if(!Object.keys) {
-		Object.keys = function(object) {
-			if (type.call(object) !== '[object Object]')
+		Object.keys = function(object)
+		{
+			if (O.toString.call(object) !== '[object Object]')
 				throw new TypeError('Object.keys'.concat(': ', object.toString(), ' is not an Object'));
 
 			var array = [];
 
 			for(var i in object) {
-				if(Object.prototype.hasOwnProperty.call(object, i))
+				if(O.hasOwnProperty.call(object, i))
 					array.push(i);
 			}
 			return array
 		};
 	}
-}(Object.prototype.toString));
+}(Object.prototype));
