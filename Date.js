@@ -6,7 +6,7 @@
  * @date: Sun Apr 15 01:55:00 2012
  **/
 
-(function(date) {
+(function(D) {
 	/**
 	 * Date.prototype.toISOString ( )
 	 * This function returns a String value represent the instance in time
@@ -24,8 +24,9 @@
 	 * console.log(today.toISOString());
 	 * //2011-10-10T14:48:00.000Z
 	*/
-	if(!date.toISOString) {
-		date.toISOString = function() {
+	if(!D.toISOString) {
+		D.toISOString = function()
+		{
 			if (!isFinite(this))
 				throw new RangeError('Date.prototype.toISOString called on non-finite value.');
 
@@ -91,12 +92,12 @@
 	 * console.log((new Date()).toJSON())
 	 * //2012-03-18T03:47:38.087Z
 	*/
-	if(!date.toJSON) {
-		Date.prototype.toJSON = function (key) {
+	if(!D.toJSON) {
+		Date.prototype.toJSON = function (key)
+		{
 			if (typeof this.toISOString != 'function')
 				throw new TypeError();
 			return this.toISOString();
 		};
 	}
 }(Date.prototype));
-
