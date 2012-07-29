@@ -45,7 +45,7 @@
 			var result = [];
 
 			for (var key in object) {
-				if (O.hasOwnProperty.call(object, key) && O.propertyIsEnumerable.call(object, key))
+				if (O.hasOwnProperty.call(object, key))
 					result.push(key);
 			}
 
@@ -199,9 +199,9 @@
 
 			var array = [];
 
-			for(var i in object) {
-				if(O.hasOwnProperty.call(object, i))
-					array.push(i);
+			for(var key in object) {
+				if(O.hasOwnProperty.call(object, key) && O.propertyIsEnumerable.call(object, key))
+					array.push(key);
 			}
 			return array
 		};
