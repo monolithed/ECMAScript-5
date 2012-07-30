@@ -417,6 +417,16 @@
 	 *
 	 * fn.property = 1;
 	 * Object.create(fn).property; // 1
+	 *
+	 * 6.
+	 * var A = {};
+	 * A.property = 1;
+	 *
+	 * var B = Object.create(A);
+	 * A.property = 2;
+	 *
+	 * B.property; // 2
+	 *
 	*/
 	if(!Object.create) {
 		Object.create = function(object, properties)
@@ -530,6 +540,14 @@
 	 * fn.property = 1;
 	 * Object.defineProperties(foo, {}).property; // 1
 	 *
+	 * 4
+	 * var A = {};
+	 * A.property = 1;
+	 *
+	 * var B = Object.defineProperties(A, {});
+	 * A.property = 2;
+	 *
+	 * B.property; // 2
 	*/
 	if(!Object.defineProperties) {
 		Object.defineProperties = function(object, properties)
