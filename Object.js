@@ -72,6 +72,10 @@
 	 * Example:
 	 * Object.create({}, { object: { value: 1 } });
 	 * Object.create(null).constructor; //undefined
+	 *
+	 * var object = {};
+	 * object.constructor.prototype.property = 1;
+	 * Object.create(object).constructor.prototype; // property
 	*/
 
 	if(!Object.create) {
