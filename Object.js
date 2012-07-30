@@ -69,15 +69,37 @@
 	 * NOTE: This is not a complete implementation!
 	 * No checks for enumerable properties.
 	 *
-	 * Example:
-	 * Object.create({}, { object: { value: 1 } });
+	 * Examples:
+	 *
+	 * 1.
+	 * Object.create({}, {
+	 *     object: {
+	 *         value: 1
+	 *     }
+	 * });
+	 *
+	 * 2.
 	 * Object.create(null).constructor; //undefined
 	 *
-	 * var object = {};
-	 * object.constructor.prototype.property = 1;
-	 * Object.create(object).constructor.prototype; // property
+	 * 3.
+	 * var object = {
+	 *     property: 1
+	 * };
+	 *
+	 * Object.create(object).property; // 1
+	 *
+	 * 4.
+	 * var fn = function() {};
+	 *
+	 * fn.prototype.property = 1;
+	 * Object.create(fn.prototype).property; // 1
+	 *
+	 * 5.
+	 * var fn = function() {};
+	 *
+	 * fn.property = 1;
+	 * Object.create(fn).property; // 1
 	*/
-
 	if(!Object.create) {
 		Object.create = function(object, properties)
 		{
@@ -152,9 +174,10 @@
 	 *
 	 * NOTE: This is not a complete implementation!
 	 *
-	 * Example:
+	 * Examples:
 	 * var object = {};
 	 *
+	 * 1.
 	 * Object.defineProperties(object, {
 	 *   a: {
 	 *      value: 1
@@ -164,8 +187,31 @@
 	 *   }
 	 * });
 	 *
-	 * console.log(object.a); //1
-	 * console.log(object.b); //2
+	 * object.a; //1
+	 * object.b; //2
+	 *
+	 * 2.
+	 * var object = {
+	 *    property: 1
+	 * }
+	 *
+	 * Object.defineProperties({}, object).property;
+	 * // TypeError: Property description must be an object!
+	 *
+	 * var object = {
+	 *    property: {
+	 *        value: 1
+	 *    }
+	 * }
+	 *
+	 * Object.defineProperties({}, object).property; // 1
+	 *
+	 * 3.
+	 * var fn = function () {};
+	 *
+	 * fn.property = 1;
+	 * Object.defineProperties(foo, {}).property; // 1
+	 *
 	*/
 	if(!Object.defineProperties) {
 		Object.defineProperties = function(object, properties)
@@ -193,7 +239,7 @@
 	 * @edition: ECMA-262 5th Edition, 15.2.3.14
 	 *
 	 * Example:
-	 * Object.keys({a: 1});
+	 * Object.keys({a: 1}); // [ a ]
 	*/
 	if(!Object.keys) {
 		Object.keys = function(object)
