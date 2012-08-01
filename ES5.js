@@ -8,40 +8,68 @@
  **/
 
 
-/**
- * Implementation of ECMAScript 5: Array
-*/
-(function(A) {
+(function(__object__, __array__, __date__, __function__)
+{
+	'use strict';
+
+	var define = function(name, value)
+	{
+		var __own__ = __object__.hasOwnProperty;
+
+		if (__object__.hasOwnProperty.call(this, name))
+			return 0;
+
+		if (Object.defineProperty)
+		{
+			Object.defineProperty(this, name,  {
+				value: value,
+				configurable: true,
+				enumerable:   false,
+				writable:     true
+			});
+		}
+		else
+			this[name] = value;
+	};
+
+
+	/**
+	 * ------------------------------------------------------------
+	 *  Array
+	 * ------------------------------------------------------------
+	**/
+
+
 	/**
 	 * @param {mixed} Elements to define is an array
 	 * @return {Boolean} Returns true if a variable is an array, false if it is not
 	 * @edition ECMA-262 5th Edition, 15.4.3.2
 	*/
-	if(!Array.isArray) {
-		Array.isArray = function(object) {
-			return Object.prototype.toString.call(object) === '[object Array]';
-		};
-	}
+	define.call(Array, 'isArray', function(object) {
+		return Object.prototype.toString.call(object) === '[object Array]';
+	});
+
 
 	/**
 	 * @param {mixed} Element to locate in the array
 	 * @return {Number} The first index at which a given element can be found in the array, or -1 if it is not present
 	 * @edition ECMA-262 5th Edition, 15.4.4.14
 	*/
-	if(!A.indexOf) {
-		A.indexOf = function(object, from)
-		{
-			var length = this.length,
-			i = from || 0;
-			i = Math[i < 0 ? 'ceil' : 'floor'](i) - 1;
 
-			while (++i <= length) {
-				if (i in this && this[i] === object)
-					return i;
-			}
-			return -1;
-		};
-	}
+	define.call(__array__, 'indexOf', function(object, from)
+	{
+		var length = this.length,
+		i = from || 0;
+		i = Math[i < 0 ? 'ceil' : 'floor'](i) - 1;
+
+		while (++i <= length) {
+			if (i in this && this[i] === object)
+				return i;
+		}
+
+		return -1;
+	});
+
 
 	/**
 	 * @param {Function} fn is Callback-function
@@ -50,21 +78,21 @@
 	 * @edition ECMA-262 5th Edition, 15.4.4.16
 	 * @return {Boolean} Tests whether all elements in the array pass the test implemented by the provided function
 	*/
-	if(!A.every) {
-		A.every = function(fn, object)
-		{
-			if (typeof fn !== 'function')
-				throw new TypeError('Array.prototype.every'.concat(': ', fn.toString(), ' is not a function'));
+	define.call(__array__, 'every', function(fn, object)
+	{
+		if (typeof fn !== 'function')
+			throw new TypeError('Array.prototype.every: '.concat(fn, ' is not a function'));
 
-			var length = this.length, i = -1;
+		var length = this.length, i = -1;
 
-			while (++i < length) {
-				if (i in this && !fn.call(object, this[i], i, this))
-					return false;
-			}
-			return true;
-		};
-	}
+		while (++i < length) {
+			if (i in this && !fn.call(object, this[i], i, this))
+				return false;
+		}
+
+		return true;
+	});
+
 
 	/**
 	 * @param {Function} fn is Callback-function
@@ -73,21 +101,21 @@
 	 * @edition ECMA-262 5th Edition, 15.4.4.17
 	 * @return {Boolean} Tests whether some element in the array passes the test implemented by the provided function
 	*/
-	if(!A.some) {
-		A.some = function(fn, object)
-		{
-			if (typeof fn !== 'function')
-				throw new TypeError('Array.prototype.some'.concat(': ', fn.toString(), ' is not a function'));
+	define.call(__array__, 'some', function(fn, object)
+	{
+		if (typeof fn !== 'function')
+			throw new TypeError('Array.prototype.some: '.concat(fn, ' is not a function'));
 
-			var length = this.length, i = -1;
+		var length = this.length, i = -1;
 
-			while(i++ < length) {
-				if(i in this && fn.call(object, this[i], i, this))
-					return true;
-			}
-			return false;
-		};
-	}
+		while(i++ < length) {
+			if(i in this && fn.call(object, this[i], i, this))
+				return true;
+		}
+
+		return false;
+	});
+
 
 	/**
 	 * @param {Function} fn is Callback-function
@@ -95,20 +123,19 @@
 	 * @return {Array} Executes a provided function once per array element
 	 * @edition ECMA-262 5th Edition, 15.4.4.18
 	*/
-	if(!A.forEach) {
-		A.forEach = function(fn, object)
-		{
-			if (typeof fn !== 'function')
-				throw new TypeError('Array.prototype.forEach'.concat(': ', fn.toString(), ' is not a function'));
+	define.call(__array__, 'forEach', function(fn, object)
+	{
+		if (typeof fn !== 'function')
+			throw new TypeError('Array.prototype.forEach: '.concat(fn, ' is not a function'));
 
-			var length = this.length, i = -1;
+		var length = this.length, i = -1;
 
-			while(i++ < length) {
-				if(Object.prototype.hasOwnProperty.call(this, i))
-					fn.call(object, this[i], i, this);
-			 }
-		};
-	}
+		while(i++ < length) {
+			if(Object.prototype.hasOwnProperty.call(this, i))
+				fn.call(object, this[i], i, this);
+		 }
+	});
+
 
 	/**
 	 * @param {Function} fn is Callback-function
@@ -117,21 +144,21 @@
 	 * @return {Array} Creates a new array with the results of calling a provided function on every element in this array
 	 * @edition ECMA-262 5th Edition, 15.4.4.19
 	*/
-	if(!A.map) {
-		A.map = function(fn, object)
-		{
-			if (typeof fn !== 'function')
-				throw new TypeError('Array.prototype.map'.concat(': ', fn.toString(), ' is not a function'));
+	define.call(__array__, 'map', function(fn, object)
+	{
+		if (typeof fn !== 'function')
+			throw new TypeError('Array.prototype.map: '.concat(fn, ' is not a function'));
 
-			var i = -1, length = this.length, array = [];
+		var i = -1, length = this.length, array = [];
 
-			while(i++ < length) {
-				if(i in this)
-					array.push(fn.call(object, this[i], i, this));
-			}
-			return array;
-		};
-	}
+		while(i++ < length) {
+			if(i in this)
+				array.push(fn.call(object, this[i], i, this));
+		}
+
+		return array;
+	});
+
 
 	/**
 	 * @param {Function} fn is Callback-function
@@ -140,22 +167,21 @@
 	 * @return {Array} Creates a new array with all elements that pass the test implemented by the provided function
 	 * @edition ECMA-262 5th Edition, 15.4.4.20
 	*/
-	if(!A.filter) {
-		A.filter = function(fn, object)
-		{
+	define.call(__array__, 'filter', function(fn, object)
+	{
+		if (typeof fn !== 'function')
+			throw new TypeError('Array.prototype.filter: '.concat(fn, ' is not a function'));
 
-			if (typeof fn !== 'function')
-				throw new TypeError('Array.prototype.filter'.concat(': ', fn.toString(), ' is not a function'));
+		var length = this.length, array = [], i = -1;
 
-			var length = this.length, array = [], i = -1;
+		while(i++ < length) {
+			if(i in this && fn.call(object, this[i], i, this))
+				array.push(this[i]);
+		}
 
-			while(i++ < length) {
-				if(i in this && fn.call(object, this[i], i, this))
-					array.push(this[i]);
-			}
-			return array;
-		};
-	}
+		return array;
+	});
+
 
 	/**
 	 * @param {Function} fn is Callback-function
@@ -163,67 +189,71 @@
 	 * @return {mixed} Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.
 	 * @edition ECMA-262 5th Edition, 15.4.4.21
 	*/
-	if(!A.reduce) {
-		A.reduce = function(fn, init)
+	define.call(__array__, 'reduce', function(fn, init)
+	{
+		if (typeof fn !== 'function')
+			throw new TypeError('Array.prototype.reduce: '.concat(fn, ' is not a function'));
+
+		var length = this.length, i = -1;
+
+		if(arguments.length < 2)
 		{
-			if (typeof fn !== 'function')
-				throw new TypeError('Array.prototype.reduce'.concat(': ', fn.toString(), ' is not a function'));
-
-			var length = this.length, i = -1;
-
-			if(arguments.length < 2)
+			while(i++ < length)
 			{
-				while(i++ < length) {
-					if(i in this) {
-						init = this[i];
-						break;
-					}
+				if(i in this) {
+					init = this[i];
+					break;
 				}
 			}
-			while(i++ < length) {
-				if(i in this)
-					init = fn.call(null, init, this[i], i, this);
-			}
-			return init;
 		}
-	}
+		while(i++ < length) {
+			if(i in this)
+				init = fn.call(null, init, this[i], i, this);
+		}
+
+		return init;
+	});
+
 
 	/**
+	 * reduceRight()
 	 * @param {Function} fn is Callback-function
 	 * @param {mixed} init Initial value
 	 * @return {mixed} Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.
 	 * @edition ECMA-262 5th Edition, 15.4.4.22
 	*/
-	if(!A.reduceRight) {
-		A.reduceRight = function(fn, init)
+	define.call(__array__, 'reduceRight', function(fn, init)
+	{
+		if (typeof fn !== 'function')
+			throw new TypeError('Array.prototype.reduceRight: '.concat(fn, ' is not a function'));
+
+		var i = this.length;
+
+		if(arguments.length < 2)
 		{
-			if (typeof fn !== 'function')
-				throw new TypeError('Array.prototype.reduceRight'.concat(': ', fn.toString(), ' is not a function'));
-
-			var i = this.length;
-
-			if(arguments.length < 2) {
-				while(i--) {
-					if(i in this) {
-						init = this[i];
-						break;
-					}
+			while(i--)
+			{
+				if(i in this) {
+					init = this[i];
+					break;
 				}
 			}
-			while(i--) {
-				if(i in this)
-					init = fn.call(null, init, this[i], i, this);
-			}
-			return init;
 		}
-	}
-})(Array.prototype);
+		while(i--) {
+			if(i in this)
+				init = fn.call(null, init, this[i], i, this);
+		}
+		return init;
+	});
 
 
-/**
- * Implementation of ECMAScript 5: Date
-*/
-(function(D) {
+	/**
+	 * ------------------------------------------------------------
+	 *  Date
+	 * ------------------------------------------------------------
+	**/
+
+
 	/**
 	 * Date.prototype.toISOString ( )
 	 * This function returns a String value represent the instance in time
@@ -241,40 +271,40 @@
 	 * console.log(today.toISOString());
 	 * //2011-10-10T14:48:00.000Z
 	*/
-	if(!D.toISOString) {
-		D.toISOString = function()
-		{
-			if (!isFinite(this))
-				throw new RangeError('Date.prototype.toISOString called on non-finite value.');
+	define.call(__date__, 'toISOString', function()
+	{
+		if (!isFinite(this))
+			throw new RangeError('Date.prototype.toISOString called on non-finite value.');
 
-			return (function() {
-				var length = arguments.length,
-					result = [],
-					divide = ['-', '-', 'T', ':', ':', '.', 'Z'],
-					i = -1, attr, item;
+		return function() {
+			var length = arguments.length,
+				result = [],
+				divide = ['-', '-', 'T', ':', ':', '.', 'Z'],
+				i = -1, attr, item;
 
-				while(++i < length) {
-					attr = arguments[i];
-					item = attr.toString().length;
+			while(++i < length)
+			{
+				attr = arguments[i];
+				item = attr.toString().length;
 
-					result.push((
-						i < length - 1 ? attr < 10 ? '0' + attr : attr
-						: item < 2 ? '00' + attr : item < 3 ? '0' + attr
-						: 3 < item ? attr / Math.pow(10, l - 3) | 0 : attr) + divide[i]
-					);
-				}
-				return result.join('');
-			}(
-				this.getUTCFullYear(),
-				(this.getUTCMonth() + 1),
-				this.getUTCDate(),
-				this.getUTCHours(),
-				this.getUTCMinutes(),
-				this.getUTCSeconds(),
-				this.getUTCMilliseconds()
-			));
-		};
-	}
+				result.push((
+					i < length - 1 ? attr < 10 ? '0' + attr : attr
+					: item < 2 ? '00' + attr : item < 3 ? '0' + attr
+					: 3 < item ? attr / Math.pow(10, l - 3) | 0 : attr) + divide[i]
+				);
+			}
+			return result.join('');
+		}(
+			this.getUTCFullYear(),
+			(this.getUTCMonth() + 1),
+			this.getUTCDate(),
+			this.getUTCHours(),
+			this.getUTCMinutes(),
+			this.getUTCSeconds(),
+			this.getUTCMilliseconds()
+		);
+	});
+ 
 
 	/**
 	 * Date.now ( )
@@ -290,11 +320,9 @@
 	 * console.log(Date.now());
 	 * //1332042247766
 	*/
-	if(!Date.now) {
-		Date.now = function () {
-			return +new Date();
-		};
-	}
+	define.call(Date, 'now', function() {
+		return +new Date();
+	});
 
 	/**
 	 * Date.prototype.toJSON ( key )
@@ -309,21 +337,22 @@
 	 * console.log((new Date()).toJSON())
 	 * //2012-03-18T03:47:38.087Z
 	*/
-	if(!D.toJSON) {
-		Date.prototype.toJSON = function (key)
-		{
-			if (typeof this.toISOString != 'function')
-				throw new TypeError();
-			return this.toISOString();
-		};
-	}
-}(Date.prototype));
+	define.call(__date__, 'toJSON', function()
+	{
+		if (typeof this.toISOString !== 'function')
+			throw new TypeError();
+
+		return this.toISOString();
+	});
 
 
-/**
- * Implementation of ECMAScript 5: Object
-*/
-(function(O) {
+	/**
+	 * ------------------------------------------------------------
+	 *  Object
+	 * ------------------------------------------------------------
+	**/
+
+
 	/**
 	 * Object.getPrototypeOf ( Object )
 	 * @param {Object} The object whose prototype is to be returned
@@ -333,14 +362,14 @@
 	 * Example:
 	 * Object.getPrototypeOf(document.childNodes) === NodeList.prototype //true
 	*/
-	if(!Object.getPrototypeOf) {
-		Object.getPrototypeOf = function (object) {
-			if (O.toString.call(object) !== '[object Object]')
-				throw new TypeError('Object.getPrototypeOf'.concat(': ', object.toString(), ' is not an Object'));
+	define.call(Object, 'getPrototypeOf', function(object)
+	{
+		if (__object__.toString.call(object) !== '[object Object]')
+			throw new TypeError('Object.getPrototypeOf'.concat(': ', object, ' is not an Object'));
 
-			return object.__proto__ || object.constructor.prototype;
-		};
-	}
+		return object.__proto__ || object.constructor.prototype;
+	});
+
 
 	/**
 	 * Object.getOwnPropertyNames ( Object )
@@ -353,23 +382,22 @@
 	 * Object.getOwnPropertyNames(alert)
 	 * //["length", "name", "arguments", "caller"]
 	*/
-	if(!Object.getOwnPropertyNames) {
-		Object.getOwnPropertyNames = function (object)
-		{
-			if (O.toString.call(object) !== '[object Object]')
-				throw new TypeError('Object.getOwnPropertyNames'.concat(': ', object.toString(), ' is not an Object'));
+	define.call(Object, 'getOwnPropertyNames', function(object)
+	{
+		if (__object__.toString.call(object) !== '[object Object]')
+			throw new TypeError('Object.getOwnPropertyNames'.concat(': ', object, ' is not an Object'));
 
-			var result = [];
+		var result = [];
 
-			for (var key in object) {
-				if (O.hasOwnProperty.call(object, key))
-					result.push(key);
-			}
+		for (var key in object) {
+			if (__object__.hasOwnProperty.call(object, key))
+				result.push(key);
+		}
 
-			return result;
-		};
-	}
+		return result;
+	});
 
+ 
 	/**
 	 * Object.create(Object object [, properties Properties ]).
 	 * Creates a new object with the specified prototype object and properties.
@@ -427,25 +455,24 @@
 	 * B.property; // 2
 	 *
 	*/
-	if(!Object.create) {
-		Object.create = function(object, properties)
-		{
-			if (typeof object !== 'object')
-				throw new TypeError('Object.create'.concat(': ', object.toString(), ' is not an Object or Null'));
+	define.call(Object, 'create', function(object, properties)
+	{
+		if (typeof object !== 'object')
+			throw new TypeError('Object.create'.concat(': ', object, ' is not an Object or Null'));
 
-			var __new__ = function() {};
-			__new__.prototype = object;
-			var init = new __new__();
+		var __new__ = function() {};
+		__new__.prototype = object;
+		var init = new __new__();
 
-			if ('__proto__' in init)
-				init.__proto__ = object;
+		if ('__proto__' in init)
+			init.__proto__ = object;
 
-			if (Object.defineProperties && properties)
-				Object.defineProperties(init, properties);
+		if (Object.defineProperties && properties)
+			Object.defineProperties(init, properties);
 
-			return init;
-		};
-	}
+		return init;
+	});
+
 
 	/**
 	 * Object.defineProperty ( Object object, String property, Object attributes)
@@ -463,30 +490,31 @@
 	 * Example:
 	 * Object.defineProperty({}, '1', { value: {a: 1}});
 	 *
-	 Object.defineProperty(Element.prototype, 'childElementCount', {
-	 	get: ElementTravrsal.childElementCount
-	 });
+	 * Object.defineProperty(Element.prototype, 'childElementCount', {
+	 *   get: ElementTravrsal.childElementCount
+	 * });
 	*/
-	if(!Object.defineProperty && O.__defineGetter__ && O.__lookupGetter__) {
-		Object.defineProperty = function(object, property, attributes)
-		{
-			if (O.toString.call(object) !== '[object Object]' && O.toString.call(attributes) !== '[object Object]' && typeof property !== 'string')
-				throw new TypeError('Object.defineProperty ( Object object, String property, Object attributes)');
-
-			if(O.hasOwnProperty.call(attributes, 'value')) {
-				if(!object.__lookupGetter__(property) && !object.__lookupSetter__(property))
-					object[property] = attributes.value;
-			}
-			else {
-				if(attributes.get)
-					object.__defineGetter__(property, attributes.get);
-
-				if(attributes.set)
-					object.__defineSetter__(property, attributes.set);
-			}
+	define.call(Object, 'defineProperty', function(object, property, attributes)
+	{
+		if (!__object__.__defineGetter__ || !__object__.__lookupGetter__)
 			return object;
+
+		if (__object__.toString.call(object) !== '[object Object]' && __object__.toString.call(attributes) !== '[object Object]')
+			throw new TypeError('Object.defineProperty ( Object object, String property, Object attributes)');
+
+		if(__object__.hasOwnProperty.call(attributes, 'value')) {
+			if(!object.__lookupGetter__(property) && !object.__lookupSetter__(property))
+				object[property] = attributes.value;
 		}
-	}
+		else {
+			if(attributes.get)
+				object.__defineGetter__(property, attributes.get);
+
+			if(attributes.set)
+				object.__defineSetter__(property, attributes.set);
+		}
+		return object;
+	});
 
 	/**
 	 * Object.defineProperties ( Object object, properties Object )
@@ -548,22 +576,21 @@
 	 *
 	 * B.property; // 2
 	*/
-	if(!Object.defineProperties) {
-		Object.defineProperties = function(object, properties)
-		{
-			if (O.toString.call(object) !== '[object Object]' && O.toString.call(properties) !== '[object Object]')
-				throw new TypeError('Object.defineProperties( Object object, properties Object )');
+	define.call(Object, 'defineProperties', function(object, properties)
+	{
+		if (__object__.toString.call(object) !== '[object Object]' && __object__.toString.call(properties) !== '[object Object]')
+			throw new TypeError('Object.defineProperties( Object object, properties Object )');
 
-			if (!Object.defineProperty)
-				return object;
-
-			for(var i in properties) {
-				if(O.hasOwnProperty.call(properties, i))
-					Object.defineProperty(object, i, properties[i]);
-			}
+		if (!Object.defineProperty)
 			return object;
-		};
-	}
+
+		for(var i in properties) {
+			if(__object__.hasOwnProperty.call(properties, i))
+				Object.defineProperty(object, i, properties[i]);
+		}
+		return object;
+	});
+
 
 	/**
 	 * Object.keys ( Object object )
@@ -576,28 +603,28 @@
 	 * Example:
 	 * Object.keys({a: 1}); // [ a ]
 	*/
-	if(!Object.keys) {
-		Object.keys = function(object)
-		{
-			if (O.toString.call(object) !== '[object Object]')
-				throw new TypeError('Object.keys'.concat(': ', object.toString(), ' is not an Object'));
+	define.call(Object, 'keys', function(object)
+	{
+		if (__object__.toString.call(object) !== '[object Object]')
+			throw new TypeError('Object.keys'.concat(': ', object.toString(), ' is not an Object'));
 
-			var array = [];
+		var array = [];
 
-			for(var key in object) {
-				if(O.hasOwnProperty.call(object, key) && O.propertyIsEnumerable.call(object, key))
-					array.push(key);
-			}
-			return array
-		};
-	}
-}(Object.prototype));
+		for(var key in object) {
+			if(__object__.hasOwnProperty.call(object, key) && __object__.propertyIsEnumerable.call(object, key))
+				array.push(key);
+		}
+		return array
+	});
 
 
-/**
- * Implementation of ECMAScript 5: Function
-*/
-(function(F) {
+	/**
+	 * ------------------------------------------------------------
+	 *  Function
+	 * ------------------------------------------------------------
+	**/
+
+
 	/**
 	 * Function.prototype.bind (thisArg [, arg1 [, arg2, …]]);
 	 * Creates a new function that, when called, itself calls this function in the context
@@ -635,31 +662,31 @@
 	 * fn.bind(object)(); // 1
 	 *
 	*/
-	if (!F.bind) {
-		F.bind = function (context) {
-			if (typeof this !== 'function')
-			  throw new TypeError('Function.prototype.bind: '.concat(this, 'is not callable!'));
+	define.call(__function__, 'bind', function(context)
+	{
+		if (typeof this !== 'function')
+			throw new TypeError('Function.prototype.bind: '.concat(this, 'is not callable!'));
 
-			var __slice__ = function(args, i) {
-				return Array.prototype.slice.call(args, i || 0);
-			},
+		var __slice__ = function(args, i) {
+			return Array.prototype.slice.call(args, i || 0);
+		},
 
-			args = __slice__(arguments, 1),
-			target = this,
-			__new__ = function() {},
+		args = __slice__(arguments, 1),
+		target = this,
+		__new__ = function() {},
 
-			bound = function() {
-				return target.apply(
-					this instanceof __new__ ? this : context || null, args.concat(__slice__(arguments))
-				);
-			};
-
-			__new__.prototype = this.prototype;
-			bound.prototype = new __new__;
-
-			return bound;
+		bound = function() {
+			return target.apply(
+				this instanceof __new__ ? this : context || null, args.concat(__slice__(arguments))
+			);
 		};
-	}
+
+		__new__.prototype = this.prototype;
+		bound.prototype = new __new__;
+
+		return bound;
+	});
+
 
 	/*
 	 * Function.prototype.apply (thisArg, argArray);
@@ -679,23 +706,23 @@
 			Function.apply(null, {length: 0});
 		}
 		catch (error) {
-			Function.prototype.apply = function(context, object)
+			__function__.apply = function(context, object)
 			{
-				if (Object.prototype.toString.call(object) !== '[object Array]')
-					object = Array.prototype.slice.call(object);
+				if (__object__.toString.call(object) !== '[object Array]')
+					object = __array__.slice.call(object);
 
 				return apply.call(this, context, object);
 			}
 		}
-	}(Function.prototype.apply));
-
-}(Function.prototype));
+	}(__function__.apply));
 
 
-/**
- * Implementation of ECMAScript 5: String
-*/
-(function($) {
+	/**
+	 * ------------------------------------------------------------
+	 *  String
+	 * ------------------------------------------------------------
+	**/
+
 	/**
 	 * String.prototype.trim ( )
 	 * Removes whitespace from both ends of the string
@@ -706,8 +733,10 @@
 	 * @license: MIT
 	 * @date: 11:34 PM 4/12/12
 	*/
-	if(!$.trim) $.trim = function () {
+	define.call(String.prototype, 'trim', function(context)
+	{
 		var expr = '\\s\\x09\\x0a\\x0\\x0c\\x0d\\x20\\xA0\\x85\\u1680\\u180E\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000\\uFEFF';
 		return this.replace(RegExp('^[' + expr + ']+|[' + expr + ']+$', 'g'), '');
-	};
-}(String.prototype));
+	});
+
+}(Object.prototype, Array.prototype, Date.prototype, Function.prototype));
