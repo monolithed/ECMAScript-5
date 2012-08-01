@@ -169,14 +169,17 @@
 			if (typeof fn !== 'function')
 				throw new TypeError('Array.prototype.reduce'.concat(': ', fn.toString(), ' is not a function'));
 
-			var length = this.length >>> 0, i = 0;
+			var length = this.length, i = -1;
 
-			if(arguments.length < 2) {
-				init = this[0];
-				i = 1;
+			if(arguments.length < 2)
+			{
+				while(i++ < length) {
+					if(i in this) {
+						init = this[i];
+						break;
+					}
+				}
 			}
-			else init = arguments[0];
-
 			while(i++ < length) {
 				if(i in this)
 					init = fn.call(null, init, this[i], i, this);
