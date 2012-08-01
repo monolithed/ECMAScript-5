@@ -182,7 +182,7 @@
 			}
 			while(i++ < length) {
 				if(i in this)
-					init = fn(init, this[i], i, this);
+					init = fn.call(init, this[i], i, this);
 			}
 			return init;
 		}
@@ -197,7 +197,6 @@
 	if(!A.reduceRight) {
 		A.reduceRight = function(fn, init)
 		{
-
 			if (typeof fn !== 'function')
 				throw new TypeError('Array.prototype.reduceRight'.concat(': ', fn.toString(), ' is not a function'));
 
@@ -213,7 +212,7 @@
 			}
 			while(i--) {
 				if(i in this)
-					init = fn(init, this[i], i, this);
+					init = fn.call(init, this[i], i, this);
 			}
 			return init;
 		}
