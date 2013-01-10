@@ -611,10 +611,10 @@
 		var array = [];
 
 		for(var key in object) {
-			if(__object__.hasOwnProperty.call(object, key) && __object__.propertyIsEnumerable.call(object, key))
+			if(__object__.hasOwnProperty.call(object, key)/* && __object__.propertyIsEnumerable.call(object, key)*/)
 				array.push(key);
 		}
-		return array
+		return array;
 	});
 
 
